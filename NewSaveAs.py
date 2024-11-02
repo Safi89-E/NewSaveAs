@@ -1,6 +1,6 @@
 from PyQt6.QtWidgets import (QApplication,QLabel,
                              QWidget, QPushButton,
-                             QTextEdit,QVBoxLayout)
+                             QTextEdit,QVBoxLayout,QFileDialog)
 from PyQt6.QtGui import QColor
 import subprocess
 import os
@@ -9,7 +9,15 @@ window = QWidget()
 layout = QVBoxLayout()
 
 Save = QPushButton("Save as")
+class FileDialog(QFileDialog):
+    def __init__(self, *args, **kwargs):
+        super(FileDialog, self).__init__(*args, **kwargs)
+        self.setNameFilters(["Mammad File (*.mmd)"])
+        self.show()
 
+    def accept(self):
+        super(FileDialog, self).accept()
+    
 FileName = QTextEdit()
 #FileName.setGeometry(50,50,300,10)
 FileName.label = QLabel("File name:")
@@ -38,7 +46,8 @@ window.setLayout(layout)
 #def read():
     #with open("empty.py", 'r') as file:  
             #content = file.read()
-    
+a=FileDialog(window)
+
 def Save_as():
     counter = 1
     #content = read()
